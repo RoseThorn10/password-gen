@@ -1,4 +1,11 @@
 // Assignment Code
+
+var upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var lowerChars = upperChars.toLowerCase();
+var specialChars = '!@#$%^&*()_-+=[]{}';
+var numChars = '0123456789';
+
+
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
@@ -13,6 +20,12 @@ generateBtn.addEventListener("click", writePassword);
 // This was done with the help of the great TA, Paul!
 function generatePassword() {
   var availableCharacters = '';
+  var hasUpper = '';
+  var hasLower = '';
+  var hasSpecial = '';
+  var hasNums = '';
+
+
 
   // Loop until at least one character type is selected
   while (availableCharacters.length === 0) {
@@ -22,14 +35,14 @@ function generatePassword() {
     var pwdLength = 0;
     while (pwdLength < 8 || pwdLength > 128) {
       var length = prompt(`How long do you want the password? Must be 8-128 characters`);
-      console.log(length);
+      // Validating user didn't enter a blank and did enter a number
       if (length == null) {
         pwdLength = 0;
       } else if (parseInt(length) > 0) {
         pwdLength = parseInt(length);
       }
 
-      console.log(pwdLength);
+      // Checking for correct length input
       if (pwdLength < 8 || pwdLength > 128) { // input must be 8-128
         alert('Password must be between 8 and 128 characters')
       };
@@ -37,30 +50,30 @@ function generatePassword() {
     }
     
     // Does user want uppercase letters?
-    var upperLtrs = confirm('Do you want to use uppercase letters?');
+    hasUpper = confirm('Do you want to use uppercase letters?');
     // If yes, adds uppercase letters to string
-    if (upperLtrs) {
-      availableCharacters = availableCharacters + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    if (hasUpper) {
+      availableCharacters = availableCharacters + upperChars;
     }
-    console.log(upperLtrs);
+    console.log(upperChars);
 
     // Does user want lowercase letters?
-    var lowerLtrs = confirm('Do you want to use lowercase letters?');
+    hasLower = confirm('Do you want to use lowercase letters?');
     // If yes, adds lowercase letters to string
-    if (lowerLtrs) {
-      availableCharacters = availableCharacters + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.toLowerCase();
+    if (hasLower) {
+      availableCharacters = availableCharacters + lowerChars;
     }
     // Does user want special characters?
-    var specChar = confirm('Do you want to use special characters?');
+    hasSpecial = confirm('Do you want to use special characters?');
     // If yes, adds special characters to string
-    if (specChar) {
-      availableCharacters = availableCharacters + '!@#$%^&*()_-+=[]{}';
+    if (hasSpecial) {
+      availableCharacters = availableCharacters + specialChars;
     }
     // Does user want numbers?
-    var nums = confirm('Do you want to use numbers?');
+    hasNums = confirm('Do you want to use numbers?');
     // If yes, adds numbers to string
-    if (nums) {
-      availableCharacters = availableCharacters + '1234567890';
+    if (hasNums) {
+      availableCharacters = availableCharacters + numChars;
     }
 
     if (availableCharacters.length === 0) {
@@ -68,24 +81,15 @@ function generatePassword() {
     }
   }
 
-  
   for(i = 0; i < pwdLength; i++) {
     // get a random index based on the length of our character bank and use that to select one character from that bank and then concatenate it onto the password
     var rndIndex = Math.floor(Math.random()*availableCharacters.length);
     var rndChar = availableCharacters[rndIndex];
     completedPassword = completedPassword + rndChar;
   }
+ 
   return (completedPassword);
 
   
 }
-
-function validatePwd(password, upperLtrs, lowerLtrs, specChar, nums) {
-
-
-
-
-  return true;
-} 
-
 
